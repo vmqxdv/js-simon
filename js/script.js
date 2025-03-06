@@ -47,21 +47,25 @@ const countDownFunc = setInterval(function() {
 form.addEventListener('submit', function(event) {
   event.preventDefault();
 
-  const result = [];
+  const guesses = [];
+  const correctGuesses = [];
 
   inputs.forEach(inp => {
     const num = Number(inp.value);
-    
-    if (numbersToMemorize.includes(num)) result.push(num);
+
+    guesses.push(num);
+
+    if (numbersToMemorize.includes(num)) correctGuesses.push(num);
   });
 
+  if (checkForDuplicates(guesses)) return message.innerHTML = 'Non puoi inserire 2 o più numeri uguali. Riprova.';
 
-  if (result.length >= 1) message.classList.replace('text-danger', 'text-success'); 
+  if (correctGuesses.length >= 1) message.classList.replace('text-danger', 'text-success'); 
 
-  if (result.length > 1) {
-    message.innerHTML = `Hai indovinato ${result.length} numeri! (${result.join(', ')})`
-  } else if (result.length === 1) {
-    message.innerHTML = `Hai indovinato 1 numero! (${result.toString()})`
+  if (correctGuesses.length > 1) {
+    message.innerHTML = `Hai indovinato ${correctGuesses.length} numeri! (${correctGuesses.join(', ')})`
+  } else if (correctGuesses.length === 1) {
+    message.innerHTML = `Hai indovinato 1 numero! (${correctGuesses.toString()})`
   } else message.innerHTML = `Hai indovinato 0 numeri :c`;
 });
 
@@ -80,4 +84,20 @@ function generateTotRandomNumber(amount, min, max) {
   };
 
   return numbers;
+};
+
+
+
+
+function checkForDuplicates(array) {
+  const duplicate = [];
+
+  for (let i = 0; i < array.length; i++) {
+    const value = array[i];
+    if (duplicate.indexOf(value) !== -1) return true;
+
+    duplicate.push(value);
+  };
+
+  return false;
 };
