@@ -28,16 +28,21 @@ numbersToMemorize.forEach(num => {
 
 
 let countDownTime = 10
+countDown.innerHTML = countDownTime;
 const countDownFunc = setInterval(function() {
+  countDownTime--;
+  countDown.innerHTML = countDownTime;
+  
   if (countDownTime <= 0) {
     clearInterval(countDownFunc);
   };
-
-  countDown.innerHTML = countDownTime;
-  countDownTime--;
 }, second);
 
 
+setTimeout(function() {
+  numberList.style.visibility = 'hidden';
+}, 10 * second);
+ 
 
 function generateTotRandomNumber(amount, min, max) {
   return Array.from({ length: amount }, () => Math.round(Math.random() * (max - min) + min));
