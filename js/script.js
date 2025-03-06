@@ -18,6 +18,9 @@ const numberList = document.getElementById('numbers-list');
 const inputGroup = document.querySelectorAll('input');
 
 
+console.log(generateRandomNumber(5, 1, 50));
+
+
 let countDownTime = 10
 const countDownFunc = setInterval(function() {
   if (countDownTime <= 0) {
@@ -27,3 +30,9 @@ const countDownFunc = setInterval(function() {
   countDown.innerHTML = countDownTime;
   countDownTime--;
 }, second);
+
+
+
+function generateTotRandomNumber(amount, min, max) {
+  return Array.from({ length: amount }, () => Math.round(Math.random() * (max - min) + min));
+};
