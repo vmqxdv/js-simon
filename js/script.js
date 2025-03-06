@@ -39,7 +39,7 @@ const countDownFunc = setInterval(function() {
   if (countDownTime <= 0) {
     clearInterval(countDownFunc);
     
-    instructions.innerHTML = 'Inserisci tutti i numeri che ricord (l\'ordine non è importante)'
+    instructions.innerHTML = 'Inserisci tutti i numeri che ricordi (l\'ordine non è importante)'
     numberList.style.visibility = 'hidden';
     form.classList.remove('d-none');
   };
