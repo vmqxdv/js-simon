@@ -17,6 +17,7 @@ const countDown = document.getElementById('countdown');
 const numberList = document.getElementById('numbers-list');
 const form = document.getElementById('answers-form');
 const inputs = document.querySelectorAll('input');
+const message = document.getElementById('message');
 
 
 const numbersToMemorize = generateTotRandomNumber(5, 1, 50);
@@ -28,7 +29,7 @@ numbersToMemorize.forEach(num => {
 });
 
 
-let countDownTime = 10
+let countDownTime = 3
 countDown.innerHTML = countDownTime;
 const countDownFunc = setInterval(function() {
   countDownTime--;
@@ -46,5 +47,15 @@ const countDownFunc = setInterval(function() {
 
 
 function generateTotRandomNumber(amount, min, max) {
-  return Array.from({ length: amount }, () => Math.round(Math.random() * (max - min) + min));
+  const numbers = [];
+  
+  while (numbers.length < amount) {
+    const num = Math.floor(Math.random() * (max - min + 1)) + min;
+    
+    if (!numbers.includes(num)) {
+      numbers.push(num);
+    };
+  };
+
+  return numbers;
 };
