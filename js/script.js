@@ -15,7 +15,8 @@ const second = 1_000;
 
 const countDown = document.getElementById('countdown');
 const numberList = document.getElementById('numbers-list');
-const inputGroup = document.querySelectorAll('input');
+const inputGroup = document.getElementById('input-group');
+const inputs = document.querySelectorAll('input');
 
 
 const numbersToMemorize = generateTotRandomNumber(5, 1, 50);
