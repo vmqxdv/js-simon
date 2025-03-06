@@ -10,8 +10,6 @@ dei numeri da indovinare sono stati individuati.
 
 */
 
-const second = 1_000;
-
 
 const countDown = document.getElementById('countdown');
 const numberList = document.getElementById('numbers-list');
@@ -43,7 +41,7 @@ const countDownFunc = setInterval(function() {
     numberList.style.visibility = 'hidden';
     form.classList.remove('d-none');
   };
-}, second);
+}, 1_000);
 
 
 form.addEventListener('submit', function(event) {
