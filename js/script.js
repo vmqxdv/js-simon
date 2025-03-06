@@ -18,7 +18,13 @@ const numberList = document.getElementById('numbers-list');
 const inputGroup = document.querySelectorAll('input');
 
 
-console.log(generateRandomNumber(5, 1, 50));
+const numbersToMemorize = generateTotRandomNumber(5, 1, 50);
+numbersToMemorize.forEach(num => {
+  const newNumber = document.createElement('li');
+  newNumber.innerHTML = num.toString();
+
+  numberList.appendChild(newNumber);
+});
 
 
 let countDownTime = 10
