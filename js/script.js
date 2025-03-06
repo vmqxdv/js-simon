@@ -10,7 +10,20 @@ dei numeri da indovinare sono stati individuati.
 
 */
 
+const second = 1_000;
+
+
 const countDown = document.getElementById('countdown');
 const numberList = document.getElementById('numbers-list');
 const inputGroup = document.querySelectorAll('input');
 
+
+let countDownTime = 10
+const countDownFunc = setInterval(function() {
+  if (countDownTime <= 0) {
+    clearInterval(countDownFunc);
+  };
+
+  countDown.innerHTML = countDownTime;
+  countDownTime--;
+}, second);
