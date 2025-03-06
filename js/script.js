@@ -15,6 +15,7 @@ const second = 1_000;
 
 const countDown = document.getElementById('countdown');
 const numberList = document.getElementById('numbers-list');
+const instructions = document.getElementById('instructions');
 const form = document.getElementById('answers-form');
 const inputs = document.querySelectorAll('input');
 const message = document.getElementById('message');
@@ -29,7 +30,7 @@ numbersToMemorize.forEach(num => {
 });
 
 
-let countDownTime = 3
+let countDownTime = 30
 countDown.innerHTML = countDownTime;
 const countDownFunc = setInterval(function() {
   countDownTime--;
@@ -38,6 +39,7 @@ const countDownFunc = setInterval(function() {
   if (countDownTime <= 0) {
     clearInterval(countDownFunc);
     
+    instructions.innerHTML = 'Inserisci tutti i numeri che ricord (l\'ordine non è importante)'
     numberList.style.visibility = 'hidden';
     form.classList.remove('d-none');
   };
@@ -46,6 +48,7 @@ const countDownFunc = setInterval(function() {
 
 form.addEventListener('submit', function(event) {
   event.preventDefault();
+
 
   const guesses = [];
   const correctGuesses = [];
@@ -58,7 +61,9 @@ form.addEventListener('submit', function(event) {
     if (numbersToMemorize.includes(num)) correctGuesses.push(num);
   });
 
+
   if (checkForDuplicates(guesses)) return message.innerHTML = 'Non puoi inserire 2 o più numeri uguali. Riprova.';
+
 
   if (correctGuesses.length >= 1) message.classList.replace('text-danger', 'text-success'); 
 
