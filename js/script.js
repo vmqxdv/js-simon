@@ -15,7 +15,7 @@ const second = 1_000;
 
 const countDown = document.getElementById('countdown');
 const numberList = document.getElementById('numbers-list');
-const inputGroup = document.getElementById('input-group');
+const form = document.getElementById('answers-form');
 const inputs = document.querySelectorAll('input');
 
 
@@ -36,14 +36,14 @@ const countDownFunc = setInterval(function() {
   
   if (countDownTime <= 0) {
     clearInterval(countDownFunc);
+    
+    numberList.style.visibility = 'hidden';
+    form.classList.remove('d-none');
   };
 }, second);
 
 
-setTimeout(function() {
-  numberList.style.visibility = 'hidden';
-}, 10 * second);
- 
+
 
 function generateTotRandomNumber(amount, min, max) {
   return Array.from({ length: amount }, () => Math.round(Math.random() * (max - min) + min));
