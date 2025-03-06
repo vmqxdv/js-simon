@@ -44,6 +44,28 @@ const countDownFunc = setInterval(function() {
 }, second);
 
 
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const result = [];
+
+  inputs.forEach(inp => {
+    const num = Number(inp.value);
+    
+    if (numbersToMemorize.includes(num)) result.push(num);
+  });
+
+
+  if (result.length >= 1) message.classList.replace('text-danger', 'text-success'); 
+
+  if (result.length > 1) {
+    message.innerHTML = `Hai indovinato ${result.length} numeri! (${result.join(', ')})`
+  } else if (result.length === 1) {
+    message.innerHTML = `Hai indovinato 1 numero! (${result.toString()})`
+  } else message.innerHTML = `Hai indovinato 0 numeri :c`;
+});
+
+
 
 
 function generateTotRandomNumber(amount, min, max) {
