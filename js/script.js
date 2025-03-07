@@ -19,7 +19,11 @@ const inputs = document.querySelectorAll('input');
 const message = document.getElementById('message');
 
 
-const numbersToMemorize = generateTotRandomNumber(5, 1, 50);
+const totNumToGenerate = 5;
+const minNumToGenerate = 1;
+const maxNumToGenerate = 50;
+
+const numbersToMemorize = generateTotRandomNumber(totNumToGenerate, minNumToGenerate, maxNumToGenerate);
 numbersToMemorize.forEach(num => {
   const newNumber = document.createElement('li');
   newNumber.innerHTML = num.toString();
@@ -48,19 +52,21 @@ form.addEventListener('submit', function(event) {
   event.preventDefault();
 
 
-  const guesses = [];
   const correctGuesses = [];
+  let isInputsInvalid = false;
 
   inputs.forEach(inp => {
     const num = Number(inp.value);
 
-    guesses.push(num);
+    if (isNaN(num) || num > maxNumToGenerate || num < minNumToGenerate || correctGuesses.includes(num)) {
+      isInputsInvalid = true;
+    };
 
     if (numbersToMemorize.includes(num)) correctGuesses.push(num);
   });
 
 
-  if (checkForDuplicates(guesses)) return message.innerHTML = 'Non puoi inserire 2 o più numeri uguali. Riprova.';
+  if (isInputsInvalid) return message.innerHTML = 'Hai inserito delle risposte non valide o duplicate. Riprova.';
 
 
   if (correctGuesses.length >= 1) message.classList.replace('text-danger', 'text-success'); 
@@ -87,20 +93,4 @@ function generateTotRandomNumber(amount, min, max) {
   };
 
   return numbers;
-};
-
-
-
-
-function checkForDuplicates(array) {
-  const duplicate = [];
-
-  for (let i = 0; i < array.length; i++) {
-    const value = array[i];
-    if (duplicate.indexOf(value) !== -1) return true;
-
-    duplicate.push(value);
-  };
-
-  return false;
 };
